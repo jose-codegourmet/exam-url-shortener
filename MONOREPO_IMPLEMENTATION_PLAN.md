@@ -96,6 +96,7 @@ shortcircuit/
 
 ### Frontend Stack
 - **React 19** with **Vite**.
+- Deploy `apps/web` on **Railway** as the primary frontend hosting platform.
 - **React Router** using data-router style (`createBrowserRouter`) or route object setup.
 - **Tailwind CSS** for utility-first styling and scalable design tokens.
 - **shadcn/ui** component primitives for consistent, accessible UI composition.
@@ -108,6 +109,7 @@ shortcircuit/
 
 ### Backend Stack (Current + Monorepo Alignment)
 - Keep existing TypeScript + Express backend.
+- Deploy `apps/backend` on **Railway** as the primary backend hosting platform.
 - Integrate **Prisma** through backend service modules and environment-driven credentials.
 - Normalize scripts for monorepo conventions:
   - `dev`, `build`, `start`, `test`, and optionally `lint`.
@@ -277,7 +279,7 @@ shortcircuit/
 - `.gitignore`
   - include `.turbo`, `node_modules`, Vite build artifacts
 - `.nvmrc` (new)
-  - set Node version to `24`
+  - set Node version to `22`
 - `.env.example` (new)
   - define shared docs for required env vars and where they are consumed
 
@@ -459,6 +461,7 @@ echo $VITE_SUPABASE_ANON_KEY
 - [ ] `pnpm --filter @apps/backend build` produces expected output.
 - [ ] Backend can reach database with configured `DATABASE_URL`.
 - [ ] Prisma client initializes without runtime schema mismatch.
+- [ ] `apps/backend` deploys successfully to Railway with required runtime env vars configured.
 
 ### Frontend
 - [ ] `pnpm --filter @apps/web dev` runs Vite app.
@@ -472,6 +475,7 @@ echo $VITE_SUPABASE_ANON_KEY
 - [ ] `@supabase/supabase-js` and `@supabase/ssr` initialize correctly for intended client/server usage.
 - [ ] Form submission flow persists/fetches URL data through backend + Prisma.
 - [ ] shadcn form components are styled and accessible in both light/dark themes (if enabled).
+- [ ] `apps/web` deploys successfully to Railway with required frontend env vars configured.
 
 ### Turborepo
 - [ ] `pnpm build` runs through turbo pipeline.
@@ -519,6 +523,7 @@ echo $VITE_SUPABASE_ANON_KEY
 
 - A production-ready monorepo foundation with minimal friction for adding more apps/packages.
 - Independent-yet-integrated backend and frontend workflows.
+- Railway-ready deployment targets for both `apps/backend` and `apps/web`.
 - Predictable build/test behavior through Turborepo caching and pnpm workspace linking.
 - A secure Prisma-backed data layer with clear backend/frontend responsibility boundaries.
 - A reusable shadcn-based form and UI component system for rapid feature delivery.

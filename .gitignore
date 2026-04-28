@@ -2,7 +2,6 @@
 .DS_Store
 Thumbs.db
 .idea/
-.vscode/
 
 # --- Logs ---
 *.log
@@ -25,8 +24,7 @@ build/
 coverage/
 *.tsbuildinfo
 
-# --- Turbo / Monorepo caches ---
-.turbo/
+# --- Monorepo caches ---
 .cache/
 
 # --- Vite ---

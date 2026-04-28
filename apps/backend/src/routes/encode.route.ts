@@ -1,9 +1,17 @@
-import { Router, Request, Response, NextFunction } from 'express'
+import {
+	type NextFunction,
+	type Request,
+	type Response,
+	Router,
+} from "express";
 
-const router: Router = Router()
+const router: Router = Router();
 
-router.post('/', function (request: Request, response: Response, next: NextFunction) {
-    throw new Error('Not implemented.')
-});
+router.post(
+	"/",
+	(_request: Request, _response: Response, _next: NextFunction) => {
+		throw new Error("Not implemented.");
+	},
+);
 
-export default router
+export default router;
