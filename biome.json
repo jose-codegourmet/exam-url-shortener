@@ -16,7 +16,14 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "a11y": {
+        "useValidAnchor": "off",
+        "noLabelWithoutControl": "off"
+      },
+      "suspicious": {
+        "noCommentText": "off"
+      }
     }
   },
   "css": {
