@@ -16,9 +16,15 @@ import { type LoginFormValues, loginFormSchema } from "./LoginFormSchema";
 
 type LoginFormProps = {
 	onSubmit?: (values: LoginFormValues) => void | Promise<void>;
+	isSubmitting?: boolean;
+	submitError?: string;
 };
 
-export default function LoginForm({ onSubmit }: LoginFormProps) {
+export default function LoginForm({
+	onSubmit,
+	isSubmitting = false,
+	submitError,
+}: LoginFormProps) {
 	const form = useForm<LoginFormValues>({
 		defaultValues: loginFormDefaults,
 	});
@@ -101,10 +107,16 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
 
 					<Button
 						className="h-14 w-full rounded-none bg-electric-cyan font-heading text-[1.7rem] font-black tracking-tight text-background uppercase hover:bg-electric-cyan/90"
+						disabled={isSubmitting}
 						type="submit"
 					>
 						LOGIN_SYSTEM <Bolt className="size-5" />
 					</Button>
+					{submitError ? (
+						<p className="font-code-accent text-[10px] tracking-[0.08em] text-destructive uppercase">
+							{submitError}
+						</p>
+					) : null}
 				</form>
 			</Form>
 

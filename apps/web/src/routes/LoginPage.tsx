@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "@/api/auth";
 import LoginForm from "@/components/auth/login-form/LoginForm";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function LoginPage() {
+	const navigate = useNavigate();
+	const loginMutation = useLoginMutation();
+
 	return (
 		<div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background text-on-background">
 			<div
@@ -33,7 +38,17 @@ export default function LoginPage() {
 						className="absolute top-0 right-0 h-px w-24 bg-electric-cyan"
 					/>
 					<CardContent className="space-y-4 p-8">
-						<LoginForm />
+						<LoginForm
+							isSubmitting={loginMutation.isPending}
+							onSubmit={async (values) => {
+								await loginMutation.mutateAsync({
+									email: values.email,
+									password: values.password,
+								});
+								navigate("/dashboard");
+							}}
+							submitError={loginMutation.error?.message}
+						/>
 					</CardContent>
 				</Card>
 			</section>
