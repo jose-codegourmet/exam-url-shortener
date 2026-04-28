@@ -15,9 +15,17 @@ import { type SignUpFormValues, signUpFormSchema } from "./SignUpFormSchema";
 
 type SignUpFormProps = {
 	onSubmit?: (values: SignUpFormValues) => void | Promise<void>;
+	isSubmitting?: boolean;
+	submitError?: string;
+	submitMessage?: string;
 };
 
-export default function SignUpForm({ onSubmit }: SignUpFormProps) {
+export default function SignUpForm({
+	onSubmit,
+	isSubmitting = false,
+	submitError,
+	submitMessage,
+}: SignUpFormProps) {
 	const form = useForm<SignUpFormValues>({
 		defaultValues: signUpFormDefaults,
 	});
@@ -133,10 +141,21 @@ export default function SignUpForm({ onSubmit }: SignUpFormProps) {
 
 					<Button
 						className="zap-flicker h-14 w-full rounded-none bg-electric-cyan font-heading text-[1.7rem] font-black tracking-tight text-background uppercase hover:bg-electric-cyan/90"
+						disabled={isSubmitting}
 						type="submit"
 					>
 						INITIALIZE ACCESS
 					</Button>
+					{submitError ? (
+						<p className="font-code-accent text-[10px] tracking-[0.08em] text-destructive uppercase">
+							{submitError}
+						</p>
+					) : null}
+					{submitMessage ? (
+						<p className="font-code-accent text-[10px] tracking-[0.08em] text-electric-cyan uppercase">
+							{submitMessage}
+						</p>
+					) : null}
 				</form>
 			</Form>
 

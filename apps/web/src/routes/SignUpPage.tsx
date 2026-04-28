@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router-dom";
+import { useSignUpMutation } from "@/api/auth";
 import SignUpForm from "@/components/auth/sign-up-form/SignUpForm";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function SignUpPage() {
+	const navigate = useNavigate();
+	const signUpMutation = useSignUpMutation();
+
 	return (
 		<div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-6 py-10 text-on-background">
 			<div className="pointer-events-none absolute inset-0 z-0 opacity-10">
@@ -36,7 +41,21 @@ export default function SignUpPage() {
 					<div className="absolute right-0 bottom-0 h-2 w-2 translate-x-1 translate-y-1 border-r-2 border-b-2 border-electric-cyan" />
 
 					<CardContent className="space-y-4 p-8">
-						<SignUpForm />
+						<SignUpForm
+							isSubmitting={signUpMutation.isPending}
+							onSubmit={async (values) => {
+								const result = await signUpMutation.mutateAsync({
+									email: values.email,
+									password: values.password,
+								});
+
+								if (result.session) {
+									navigate("/dashboard");
+								}
+							}}
+							submitMessage={signUpMutation.data?.message}
+							submitError={signUpMutation.error?.message}
+						/>
 					</CardContent>
 				</Card>
 
